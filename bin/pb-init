@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+const program = require('commander')
+
+program.option('--no-install', 'Install dependencies after boilerplate, default: true').parse(process.argv)
+
+require('../lib/init').default(program)

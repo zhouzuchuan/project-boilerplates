@@ -1,0 +1,98 @@
+{
+    "name": "vue-boilerplate",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint",
+        "lint:css": "stylelint 'src/**/*.vue' --fix"
+    },
+    "dependencies": {
+        "api-manage": "^0.2.2",
+        "data-mock": "^0.3.0",
+        "element-ui": "^2.5.2",
+        "lajax": "^1.1.6",
+        "model-redux": "^1.0.0",
+        "normalize.css": "^8.0.1",
+        "nprogress": "^0.2.0",
+        "vue": "^2.5.21",
+        "vue-router": "^3.0.2"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "^3.3.0",
+        "@vue/cli-plugin-eslint": "^3.3.0",
+        "@vue/cli-service": "^3.3.0",
+        "babel-eslint": "^10.0.1",
+        "eslint": "^5.12.1",
+        "eslint-plugin-html": "^5.0.0",
+        "eslint-plugin-vue": "^5.1.0",
+        "less": "^3.9.0",
+        "less-loader": "^4.1.0",
+        "stylelint": "^9.10.1",
+        "stylelint-config-recess-order": "^2.0.1",
+        "stylelint-config-standard": "^18.2.0",
+        "stylelint-order": "^2.0.0",
+        "vue-template-compiler": "^2.5.21"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "eslint:recommended"
+        ],
+        "rules": {
+            "indent": [
+                0,
+                4
+            ],
+            "quotes": [
+                2,
+                "single"
+            ],
+            "linebreak-style": [
+                2,
+                "unix"
+            ],
+            "semi": [
+                2,
+                "never"
+            ],
+            "no-cond-assign": 2,
+            "no-constant-condition": 2,
+            "no-dupe-args": 2,
+            "no-dupe-keys": 2,
+            "no-duplicate-case": 2,
+            "no-console": 1,
+            "no-debugger": 1,
+            "no-var": 1,
+            "no-trailing-spaces": 0,
+            "eol-last": 0,
+            "no-unused-vars": 2,
+            "no-unused-expressions": 0,
+            "no-underscore-dangle": 0,
+            "no-alert": 2,
+            "no-lone-blocks": 0,
+            "jsx-quotes": 0
+        },
+        "parserOptions": {
+            "parser": "babel-eslint"
+        },
+        "plugins": [
+            "vue"
+        ]
+    },
+    "postcss": {
+        "plugins": {
+            "autoprefixer": {}
+        }
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ]
+}
