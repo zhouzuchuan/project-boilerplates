@@ -2,9 +2,6 @@
 'use strict'
 
 const program = require('commander')
-const join = require('path').join
-const { spawn } = require('child_process')
-const exists = require('fs').existsSync
 const printLogo = require('../lib/prompt').logo
 
 // Notify update when process exits
@@ -29,25 +26,15 @@ program
 function printHelp() {
     console.log('  Commands:')
     console.log()
-    console.log('    create         Creates a new application')
-    console.log('    init           Init a new RE application in the current folder')
+    console.log('    init         init a new application')
     console.log()
     console.log('  All commands can be run with -h (or --help) for more information.')
 
     printLogo()
 }
 
-let subcmd = program.args[0]
-
-if (!subcmd) {
-    program.help()
+if (program.args[0] === 'init') {
+    require('../lib/init').default()
 } else {
-    let file = join(__dirname, `pb-${subcmd}`)
-    if (exists(file)) {
-        spawn(file, process.argv.slice(3), { stdio: 'inherit', customFds: [0, 1, 2] }).on('close', function(code) {
-            process.exit(code)
-        })
-    } else {
-        program.help()
-    }
+    program.help()
 }
