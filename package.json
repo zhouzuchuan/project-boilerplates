@@ -1,7 +1,7 @@
 {
-    "name": "project-boilerplate",
-    "version": "0.0.1",
-    "description": "",
+    "name": "project-boilerplates",
+    "version": "1.0.0",
+    "description": "all-in-one project boilerplates",
     "main": "lib",
     "bin": {
         "pb": "bin/pb"
