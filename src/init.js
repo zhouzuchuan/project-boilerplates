@@ -1,29 +1,15 @@
 import { join } from 'path'
-import vfs from 'vinyl-fs'
-import { mkdirpSync } from 'fs-extra'
 import { existsSync } from 'fs'
-import through from 'through2'
-import emptyDir from 'empty-dir'
 import inquirer from 'inquirer'
 
-import { info, successStart, log, templateExistTip, existTip } from './prompt'
-import data from './data'
+import { successStart, log, gitPathExistTip, existTip } from './prompt'
+import config from '../config.json'
 
-const mapData = data.reduce((r, v) => ({ ...r, [v.name]: v }), {})
+const configBoilerplateMap = config.reduce((r, v) => ({ ...r, [v.name]: v }), {})
 
-const template = (dest, cwd) => {
-    log('')
-    return through.obj(function(file, enc, cb) {
-        if (!file.stat.isFile()) {
-            return cb()
-        }
-
-        info('create', file.path.replace(cwd + '/', ''))
-        this.push(file)
-        cb()
-    })
-}
-
+/**
+ * 初始化样板
+ * */
 const init = () => {
     console.log('sssss')
 
@@ -31,19 +17,19 @@ const init = () => {
         .prompt([
             {
                 type: 'list',
-                name: 'name',
+                name: 'boilerplateName',
                 message: 'choose boilerplate?',
-                choices: Object.keys(mapData),
+                choices: Object.keys(configBoilerplateMap),
             },
         ])
-        .then(({ name }) => {
+        .then(({ boilerplateName }) => {
             inquirer
                 .prompt([
                     {
                         type: 'input',
-                        name: 'appName',
+                        name: 'projectName',
                         message: 'input project name?',
-                        default: name,
+                        default: boilerplateName,
                         validate: val => (val === '' ? 'not empty!' : true),
                     },
                     {
@@ -53,43 +39,26 @@ const init = () => {
                         default: true,
                     },
                 ])
-                .then(({ appName, install }) => {
-                    const dest = join(process.cwd(), appName)
+                .then(({ projectName, install }) => {
+                    const dest = join(process.cwd(), projectName)
 
+                    // 当前目录路径是否存在（避免覆盖）
                     if (existsSync(dest)) {
                         existTip()
                     }
 
-                    const target = mapData[name].alias
-                    const cwd = join(__dirname, '../boilerplates', target)
+                    const gitPath = configBoilerplateMap[boilerplateName].git
 
-                    // 当前选中额模板是否存在
-                    if (!existsSync(cwd)) {
-                        templateExistTip()
+                    if (gitPath) {
+                        log(`Creating a new ${boilerplateName} app in ${dest}.`)
+                        log()
+
+                        require('./install').default({ projectName, install, gitPath }, () =>
+                            successStart(boilerplateName, dest),
+                        )
+                    } else {
+                        gitPathExistTip()
                     }
-
-                    mkdirpSync(dest)
-                    process.chdir(dest)
-
-                    if (!emptyDir.sync(dest)) {
-                        existTip()
-                    }
-
-                    log(`Creating a new ${target} app in ${dest}.`)
-                    log()
-
-                    vfs.src(['**/*', '!node_modules/**/*'], { cwd: cwd, cwdbase: true, dot: true })
-                        .pipe(template(dest, cwd))
-                        .pipe(vfs.dest(dest))
-                        .on('end', function() {
-                            if (install) {
-                                info('run', 'npm install')
-                                require('./install').default(() => successStart(target, dest))
-                            } else {
-                                successStart(target, dest)
-                            }
-                        })
-                        .resume()
                 })
         })
 }

@@ -1,5 +1,4 @@
 import chalk from 'chalk'
-import leftPad from 'left-pad'
 import pkg from '../package.json'
 
 export const logo = () => {
@@ -24,10 +23,6 @@ export const logo = () => {
     )
     console.log(chalk.green(`project-boilerplate ${chalk.bgGreen(chalk.white(` v${pkg.version} `))}`))
     console.log()
-}
-
-export const info = (type, message) => {
-    console.log(`${chalk.green.bold(leftPad(type, 12))}  ${message}`)
 }
 
 /**
@@ -71,14 +66,18 @@ export const successStart = (projectName, dest) => {
     `)
 }
 
-// 文件夹存在 提示
+/**
+ * 文件夹存在 提示
+ * */
 export const existTip = () => {
     error('Existing files here, please run init command in an empty folder!')
     process.exit(1)
 }
 
-// 模板不存在 提示
-export const templateExistTip = () => {
-    error('The current boilerplate does not exist, please re-select!')
+/**
+ * 样板git path不存在 提示
+ */
+export const gitPathExistTip = () => {
+    error('git path not exists!')
     process.exit(1)
 }
