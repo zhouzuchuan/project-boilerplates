@@ -57,12 +57,15 @@ const install = ({ projectName, install, gitPath }, done) => {
 
     // 克隆样板
     runCmd(which.sync(git), ['clone', gitPath, projectName], function() {
+        log()
         log('git clone end!')
         log()
 
         // 是否下载
         if (install) {
+            process.chdir(projectName)
             const npm = findNpm()
+
             runCmd(which.sync(npm), ['install'], function() {
                 log(`${npm} install end!`)
                 log()
