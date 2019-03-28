@@ -45,13 +45,13 @@ const init = () => {
                         existTip()
                     }
 
-                    const gitPath = configBoilerplateMap[boilerplateName].git
+                    const projectConfig = configBoilerplateMap[boilerplateName]
 
-                    if (gitPath) {
+                    if (projectConfig) {
                         log(`Creating a new ${boilerplateName} app in ${dest}.`)
                         log('')
 
-                        require('./install').default({ projectName, install, gitPath }, () =>
+                        require('./install').default({ projectName, install, projectConfig }, () =>
                             successStart(boilerplateName, dest),
                         )
                     } else {

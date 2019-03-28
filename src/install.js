@@ -53,14 +53,16 @@ const findGit = () => {
 /**
  * 下载样板以及依赖
  * */
-const install = ({ projectName, install, gitPath }, done) => {
+const install = ({ projectName, install, projectConfig }, done) => {
     const git = findGit()
 
     // 克隆样板
-    runCmd(which.sync(git), ['clone', gitPath, projectName], function() {
+    runCmd(which.sync(git), ['clone', projectConfig.git, projectName], function() {
         if (!existsSync(projectName)) {
             log('')
             error('   git clone failed! please check... ')
+            log('')
+            log(`   project url: ${projectConfig.home}`)
             log('')
             process.exit(1)
         } else {
