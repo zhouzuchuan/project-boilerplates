@@ -1,6 +1,6 @@
 import which from 'which'
-
-import { log } from './prompt'
+import { existsSync } from 'fs'
+import { log, error } from './prompt'
 
 /**
  * 启动命令
@@ -22,31 +22,32 @@ function runCmd(cmd, args, fn) {
  * 是否安装npm
  * */
 const findNpm = () => {
-    let npms = process.platform === 'win32' ? ['yarn.cmd', 'npm.cmd', 'cnpm.cmd'] : ['yarn', 'cnpm', 'npm']
+    let npms = process.platform === 'win32' ? ['cnpm.cmd', 'yarn.cmd', 'npm.cmd'] : ['cnpm', 'yarn1', 'npm1']
     for (let i = 0; i < npms.length; i++) {
         try {
             which.sync(npms[i])
             log('use npm: ' + npms[i])
             return npms[i]
         } catch (e) {
-            log(e)
+            log('')
         }
     }
-    throw new Error('please install npm')
 }
 
 /**
  * 是否安装git
  * */
 const findGit = () => {
-    let git = `git${process.platform === 'win32' ? '.cmd' : ''}`
+    let git = 'git'
+
     try {
         which.sync(git)
         return git
     } catch (e) {
         log(e)
+        log('')
+        error('   please install git')
     }
-    throw new Error('please install git')
 }
 
 /**
@@ -57,20 +58,35 @@ const install = ({ projectName, install, gitPath }, done) => {
 
     // 克隆样板
     runCmd(which.sync(git), ['clone', gitPath, projectName], function() {
-        log()
-        log('git clone end!')
-        log()
+        if (!existsSync(projectName)) {
+            log('')
+            error('   git clone failed! please check... ')
+            log('')
+            process.exit(1)
+        } else {
+            log('')
+            log('git clone end!')
+            log('')
+        }
 
         // 是否下载
         if (install) {
             process.chdir(projectName)
             const npm = findNpm()
 
-            runCmd(which.sync(npm), ['install'], function() {
-                log(`${npm} install end!`)
-                log()
-                done()
-            })
+            if (npm) {
+                runCmd(which.sync(npm), ['install'], function() {
+                    log(`${npm} install end!`)
+                    log()
+                    done()
+                })
+            } else {
+                error('  please install npm')
+                log('')
+                log('')
+                log('')
+                log('')
+            }
         } else {
             done()
         }

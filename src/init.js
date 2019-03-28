@@ -11,14 +11,12 @@ const configBoilerplateMap = config.reduce((r, v) => ({ ...r, [v.name]: v }), {}
  * 初始化样板
  * */
 const init = () => {
-    console.log('sssss')
-
     inquirer
         .prompt([
             {
                 type: 'list',
                 name: 'boilerplateName',
-                message: 'choose boilerplate?',
+                message: 'choose boilerplate[选择工程模板]?',
                 choices: Object.keys(configBoilerplateMap),
             },
         ])
@@ -28,14 +26,14 @@ const init = () => {
                     {
                         type: 'input',
                         name: 'projectName',
-                        message: 'input project name?',
+                        message: 'input project name[输入项目名称]?',
                         default: boilerplateName,
                         validate: val => (val === '' ? 'not empty!' : true),
                     },
                     {
                         type: 'confirm',
                         name: 'install',
-                        message: 'download dependency?',
+                        message: 'download dependency[下载依赖]?',
                         default: true,
                     },
                 ])
@@ -51,7 +49,7 @@ const init = () => {
 
                     if (gitPath) {
                         log(`Creating a new ${boilerplateName} app in ${dest}.`)
-                        log()
+                        log('')
 
                         require('./install').default({ projectName, install, gitPath }, () =>
                             successStart(boilerplateName, dest),
