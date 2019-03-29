@@ -21,7 +21,7 @@ export const logo = () => {
             `,
         ),
     )
-    console.log(chalk.green(`project-boilerplate ${chalk.bgGreen(chalk.white(` v${pkg.version} `))}`))
+    console.log(chalk.green(`project-boilerplates ${chalk.bgGreen(chalk.white(` v${pkg.version} `))}`))
     console.log()
 }
 

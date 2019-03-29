@@ -1,6 +1,6 @@
 {
     "name": "project-boilerplates",
-    "version": "1.3.3",
+    "version": "1.3.4",
     "description": "all-in-one project boilerplates",
     "main": "lib",
     "bin": {
