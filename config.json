@@ -1,12 +1,12 @@
 [
     {
         "name": "Vue",
-        "git": "git@github.com:zhouzuchuan/vue-boilerplate.git",
+        "git": "https://github.com/zhouzuchuan/vue-boilerplate.git",
         "home": "https://github.com/zhouzuchuan/vue-boilerplate"
     },
     {
         "name": "React Of Typescript",
-        "git": "git@github.com:zhouzuchuan/react-typescript-boilerplate.git",
+        "git": "https://github.com/zhouzuchuan/react-typescript-boilerplate.git",
         "home": "https://github.com/zhouzuchuan/react-typescript-boilerplate"
     }
 ]
