@@ -22,7 +22,7 @@ function runCmd(cmd, args, fn) {
  * 是否安装npm
  * */
 const findNpm = () => {
-    let npms = process.platform === 'win32' ? ['cnpm.cmd', 'yarn.cmd', 'npm.cmd'] : ['cnpm', 'yarn1', 'npm1']
+    let npms = process.platform === 'win32' ? ['yarn.cmd', 'cnpm.cmd', 'npm.cmd'] : ['yarn', 'cnpm', 'npm']
     for (let i = 0; i < npms.length; i++) {
         try {
             which.sync(npms[i])
