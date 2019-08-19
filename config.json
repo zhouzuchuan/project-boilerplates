@@ -8,5 +8,10 @@
         "name": "React Of Typescript",
         "git": "https://github.com/zhouzuchuan/react-typescript-boilerplate.git",
         "home": "https://github.com/zhouzuchuan/react-typescript-boilerplate"
+    },
+    {
+        "name": "Express Of Typescript",
+        "git": "https://github.com/microsoft/TypeScript-Node-Starter.git",
+        "home": "https://github.com/microsoft/TypeScript-Node-Starter"
     }
 ]
