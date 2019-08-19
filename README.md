@@ -32,8 +32,6 @@ pb init
 
 ## 模板
 
--   `Vue`: [https://github.com/zhouzuchuan/vue-boilerplate](https://github.com/zhouzuchuan/vue-boilerplate)
-
--   `React Of Typescript`: [https://github.com/zhouzuchuan/react-typescript-boilerplate](https://github.com/zhouzuchuan/react-typescript-boilerplate)
+[查看更多](https://zhouzuchuan.github.io/project-boilerplates/)
 
 ### `欢迎大家 issues，提供更多更好的工程化模板`
