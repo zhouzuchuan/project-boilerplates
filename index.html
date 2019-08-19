@@ -11,7 +11,7 @@
     </body>
     <script>
         var boxDom = document.getElementById('box');
-        fetch('/config.json')
+        fetch('./config.json')
             .then(res => res.json())
             .then(data => {
                 var wrapper = document.createDocumentFragment();
