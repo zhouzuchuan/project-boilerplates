@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Document</title>
-    </head>
-    <body>
-        <div id="box"></div>
-    </body>
-    <script>
-        var boxDom = document.getElementById('box');
-        fetch('./config.json')
-            .then(res => res.json())
-            .then(data => {
-                var wrapper = document.createDocumentFragment();
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>project bolierplates 支持模板</title>
+  </head>
+  <body>
+    <div id="box"></div>
+  </body>
+  <script>
+    var boxDom = document.getElementById("box");
+    fetch("./config.json")
+      .then(res => res.json())
+      .then(data => {
+        var wrapper = document.createDocumentFragment();
 
-                data.forEach(function(item) {
-                    var p = document.createElement('p');
-                    p.innerHTML =
-                        item.name + ': ' + '<a href="' + item.home + '" target="_blank">' + item.home + '</a>';
-                    wrapper.appendChild(p);
-                });
+        data.forEach(function(item) {
+          var p = document.createElement("p");
+          p.innerHTML =
+            item.name +
+            ": " +
+            '<a href="' +
+            item.home +
+            '" target="_blank">' +
+            item.home +
+            "</a>";
+          wrapper.appendChild(p);
+        });
 
-                boxDom.appendChild(wrapper);
-            });
-    </script>
+        boxDom.appendChild(wrapper);
+      });
+  </script>
 </html>
