@@ -5,6 +5,11 @@
     "home": "https://github.com/zhouzuchuan/vue-boilerplate"
   },
   {
+    "name": "Vuetify + Vue2",
+    "git": "https://github.com/zhouzuchuan/vuetify-boilerplate.git",
+    "home": "https://github.com/zhouzuchuan/vuetify-boilerplate"
+  },
+  {
     "name": "React Of Typescript",
     "git": "https://github.com/zhouzuchuan/react-typescript-boilerplate.git",
     "home": "https://github.com/zhouzuchuan/react-typescript-boilerplate"
